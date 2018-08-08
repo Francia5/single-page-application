@@ -1,0 +1,16 @@
+#carouselExampleControls img {
+
+    height: 80vh;
+}
+
+#pantalla img {
+    max-width: 60%;
+}
+
+nav {
+    color: rgb(48, 33, 92);
+}
+
+.counter {
+    display: inline-block;
+}
