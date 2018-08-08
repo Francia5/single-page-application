@@ -153,8 +153,22 @@ function getElementsCart(e, nameProductCar, priceProductCar){
     var elem = e.target;
     var nameProductCar = $(elem).attr('data-product');
     var priceProductCar = $(elem).attr('data-price');
-    $('#text-mdl').append(`${nameProductCar} 
-            ${priceProductCar}`);
+    var templateModal =
+                            `<table class="table">
+                                 <thead>
+                                        <tr>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Producto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="price-modal">$ ${priceProductCar}</td>
+                                            <td id="product-modal">${nameProductCar}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>`;
+    $('#text-mdl').append(templateModal);
     count += 1;
     $('#count').text(count);
     array.push(parseInt(priceProductCar));
