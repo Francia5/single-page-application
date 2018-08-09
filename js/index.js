@@ -162,9 +162,10 @@ function getElementsCart(e, nameProductCar, priceProductCar){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td id="price-modal">$ ${priceProductCar}</td>
+                                        <tr id="prodid${count}">
+                                            <td>$ ${priceProductCar}</td>
                                             <td id="product-modal">${nameProductCar}</td>
+                                            <td><i class="fas fa-trash-alt delete" data-delete="prodid${count}"></i></td>
                                         </tr>
                                     </tbody>
                                 </table>`;
@@ -176,11 +177,16 @@ function getElementsCart(e, nameProductCar, priceProductCar){
         total += array[i];
     };
 
-    console.log(total);
     $('#total').html("Total: $" + '' + total);
     
     
-    
+    $('.delete').click(function(e){
+        var clickElement = e.target;
+        // console.log(clickElement);
+        var deleteElement = $(clickElement).attr('data-delete');
+        // console.log(deleteElement);        
+        
+    })
 
 };
 
@@ -190,7 +196,7 @@ function getElementsCart(e, nameProductCar, priceProductCar){
 $(document).ready(function () {
     getAll();
 
-    $('#myModal').modal(options)
+    $('#myModal').modal();
 
  
 });
