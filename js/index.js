@@ -172,12 +172,21 @@ function getElementsCart(e, nameProductCar, priceProductCar){
     $('#text-mdl').append(templateModal);
     count += 1;
     $('#count').text(count);
-    array.push(parseInt(priceProductCar));
-    for(var i = 0; i < array.length; i++){
-        total += array[i];
-    };
+    array.push(parseFloat(priceProductCar));
+    function sumarArray(array) {
+        var suma = 0;
+        array.forEach(function (numero) {
+            suma += numero;
+        });
+        return suma;
+    }
 
-    $('#total').html("Total: $" + '' + total);
+    var sumar = sumarArray(array);
+
+    
+
+
+    $('#total').html(`<strong>TOTAL: $${sumar}</strong>`);
     
     
     $('.delete').click(function(e){
