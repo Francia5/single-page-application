@@ -191,9 +191,10 @@ function getElementsCart(e, nameProductCar, priceProductCar){
     
     $('.delete').click(function(e){
         var clickElement = e.target;
-        // console.log(clickElement);
+        console.log(clickElement);
         var deleteElement = $(clickElement).attr('data-delete');
-        // console.log(deleteElement);        
+        console.log(deleteElement);
+
         
     })
 
