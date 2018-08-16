@@ -4,9 +4,7 @@ var form = $('#search-form');
 
 var search = $('#searchProducts'); //Button 
 var searchedForText;
-var count = 0;
-var array = [];
-var total = 0;
+
 
 
 
@@ -41,7 +39,7 @@ function getData() { // Función para obtener el producto que busque el usuario
                                         <hr>
                                         <p>Ciudad del vendedor: ${citySales}</p>
                                         <hr>
-                                         <a href="#" class="btn btn-primary car" data-product="${titleProduct}" data-price="${priceProduct}">Comprar</a>
+                                         <button class="btn btn-primary car" data-product="${titleProduct}" data-price="${priceProduct}" type="button">Comprar</button>
                                     </div>
                                 </div>`;
 
@@ -126,18 +124,20 @@ function productCategories(cateData) { //Función para obtener cada artículo po
                                         <hr>
                                         <p>Ciudad del vendedor: ${shipping}</p>
                                         <hr>
-                                         <a href="#" class="btn btn-primary car" data-product="${nameProduct}" data-price= "${costProduct}">comprar</a>
+                                         <button class="btn btn-primary car" data-product="${nameProduct}" data-price="${costProduct}" type="button">comprar</button>
                                     </div>
                                 </div>`;
 
            $('#pantalla').append(template);
 
-       }
+        }
 
-        $('.car').click(getElementsCart); 
 
+        $('.car').click(getElementsCart);
+
+       
     }
-
+   
 
 
 };
@@ -149,54 +149,53 @@ function error() {
 
 
 
+var count = 0;
+var array = [];
+
+function deleteCart(e) {
+    console.log(e)
+    $(e).closest('tr').remove();
+    count--;
+    console.log(count)
+    $('#count').text(` ${count}`);
+}
+
+
 function getElementsCart(e, nameProductCar, priceProductCar){
+  
     var elem = e.target;
     var nameProductCar = $(elem).attr('data-product');
     var priceProductCar = $(elem).attr('data-price');
     var templateModal =
-                            `<table class="table">
-                                 <thead>
-                                        <tr>
-                                            <th scope="col">Precio</th>
-                                            <th scope="col">Producto</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr id="prodid${count}">
-                                            <td>$ ${priceProductCar}</td>
-                                            <td id="product-modal">${nameProductCar}</td>
-                                            <td><i class="fas fa-trash-alt delete" data-delete="prodid${count}"></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table>`;
-    $('#text-mdl').append(templateModal);
+                            `<tr>
+                                <td>$ ${priceProductCar}</td> 
+                                <td id="product-modal">${nameProductCar}</td>
+                                <td><i class="fas fa-trash-alt delete" onclick="deleteCart(this)" data-delete="${count}"></i></td>
+                            </tr>`;
+    $('#tbody').append(templateModal);
+    
     count += 1;
-    $('#count').text(count);
+
+    $('#count').text(`${count}`);
+
+
     array.push(parseFloat(priceProductCar));
+
     function sumarArray(array) {
         var suma = 0;
         array.forEach(function (numero) {
             suma += numero;
         });
+
         return suma;
-    }
+    };
 
     var sumar = sumarArray(array);
 
-    
+    $('#total').html(`<strong>TOTAL: $${sumar}</strong>`);    
 
 
-    $('#total').html(`<strong>TOTAL: $${sumar}</strong>`);
     
-    
-    $('.delete').click(function(e){
-        var clickElement = e.target;
-        console.log(clickElement);
-        var deleteElement = $(clickElement).attr('data-delete');
-        console.log(deleteElement);
-
-        
-    })
 
 };
 
