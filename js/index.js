@@ -151,14 +151,45 @@ function error() {
 
 var count = 0;
 var array = [];
+var larray =[];
 
 function deleteCart(e) {
-    console.log(e)
+     larray = array;
     $(e).closest('tr').remove();
     count--;
-    console.log(count)
+    var targe = e.target;
+    console.log(targe);
+    
+    // console.log(count)
     $('#count').text(` ${count}`);
-}
+
+    // var rest = $(e).attr('data-rest');
+    // console.log(rest);
+    // larray.push(rest);
+    var cout = $(e).attr('data-delete');
+    // console.log(cout);
+    
+    
+    var position = larray.indexOf(cout);
+    console.log(position);
+    
+    
+    //  var indexDelete= ($(e).data("delete"));
+    // console.log(indexDelete);
+    //larray.splice(indexDelete, 1);
+   // console.log(larray);
+
+
+    
+
+    
+   // $('#total').html(`<strong>TOTAL: $${sumarArray(larray)-rest}</strong>`)
+
+    // $('#total').html(`<strong>TOTAL: $${sumarArray(array)}</strong>`); 
+
+
+
+};
 
 
 function getElementsCart(e, nameProductCar, priceProductCar){
@@ -170,7 +201,7 @@ function getElementsCart(e, nameProductCar, priceProductCar){
                             `<tr>
                                 <td>$ ${priceProductCar}</td> 
                                 <td id="product-modal">${nameProductCar}</td>
-                                <td><i class="fas fa-trash-alt delete" onclick="deleteCart(this)" data-delete="${count}"></i></td>
+                                <td><i class="fas fa-trash-alt delete" onclick="deleteCart(this)" data-delete="${count}" data-rest="${priceProductCar}"></i></td>
                             </tr>`;
     $('#tbody').append(templateModal);
     
@@ -181,22 +212,22 @@ function getElementsCart(e, nameProductCar, priceProductCar){
 
     array.push(parseFloat(priceProductCar));
 
-    function sumarArray(array) {
-        var suma = 0;
-        array.forEach(function (numero) {
-            suma += numero;
-        });
-
-        return suma;
-    };
-
-    var sumar = sumarArray(array);
-
-    $('#total').html(`<strong>TOTAL: $${sumar}</strong>`);    
-
+    
+   
+    $('#total').html(`<strong>TOTAL: $${sumarArray(array)}</strong>`);    
 
     
 
+};
+
+
+function sumarArray(array) {
+    var suma = 0;
+    array.forEach(function (numero) {
+        suma += numero;
+    });
+
+    return suma;
 };
 
 
